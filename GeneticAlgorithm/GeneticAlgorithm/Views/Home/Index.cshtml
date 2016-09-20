@@ -1,0 +1,158 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@model GeneticAlgorithm.ViewModel.Home.IndexViewModel
+
+
+<form action="@Url.Action("Index")" method="post">
+
+    <div class="row" style="background-color:darkgray">
+        <button ></button>
+        <div class="col-sm-3 col-md-6 col-lg-4" >
+            <div class="form-group ">
+                @Html.LabelFor(x => x.Probabilidad)
+                @Html.TextBoxFor(x => x.Probabilidad, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Probabilidad)
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(x => x.TamanoGeneracion)
+                @Html.TextBoxFor(x => x.TamanoGeneracion, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.TamanoGeneracion)
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(x => x.TotalGeneraciones)
+                @Html.TextBoxFor(x => x.TotalGeneraciones, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.TotalGeneraciones)
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(x => x.BitsX)
+                @Html.TextBoxFor(x => x.BitsX, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.BitsX)
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(x => x.BitsY)
+                @Html.TextBoxFor(x => x.BitsY, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.BitsY)
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-danger"><i class="fa glyphicon-facetime-video"></i> Generar</button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-9 col-md-6 col-lg-8" >
+            sdsdsd
+        </div>
+
+        
+        </div>
+
+    
+
+
+    <table class="table" >
+
+        <tr>
+            <th>Generacion</th>
+            <th>Genes en X</th>
+            <th>Genes en Y</th>
+            <th>Mutacion</th>
+
+        </tr>
+        @for (int i = 0; i < (Model==null?0:(Model.LstGeneracion==null?0: Model.LstGeneracion.Count)); i++)
+        {
+            <tr>
+                <td>Generacion @(i+1)</td>
+                <td>
+                    @for (int j = 0; j < Model.LstGeneracion[i].Count; j++)
+
+                    {
+                        String temp = "";
+
+
+                        for (int a = 0; a < Model.BitsX; a++)
+                        {
+
+                            temp += Model.LstGeneracion[i][j][a].ToString();
+                            //@Model.LstGeneracion[i][j][a];
+                        }
+
+                        
+                    @Html.Label("tb" + i, temp, new { @class = "form-control" });
+
+
+                    }
+
+
+            </td>
+
+                <td>
+                    @for (int j = 0; j < Model.LstGeneracion[i].Count; j++)
+
+                    {
+                        String temp = "";
+
+
+                        for (int a = Model.BitsX; a < Model.LstGeneracion[i][j].Count; a++)
+                        {
+
+                            temp += Model.LstGeneracion[i][j][a].ToString();
+                            //@Model.LstGeneracion[i][j][a];
+                        }
+
+
+                        @Html.Label("tb" + i, temp, new { @class = "form-control" });
+
+
+                    }
+
+
+                </td>
+
+                
+            <td>
+                @for (int j = 0; j < Model.LstGeneracionMutacion.Count; j++)
+
+                {
+                    
+
+                    if (Model.LstGeneracionMutacion[j].Item2 == i)
+                    {
+                        for (int a = 0; a < Model.LstGeneracionMutacion[j].Item1.Count; a++)
+                        {
+                            String temp = "";
+                            for (int k = 0; k < Model.LstGeneracionMutacion[j].Item1[a].Count; k++)
+                            {
+                                temp += Model.LstGeneracionMutacion[j].Item1[a][k].ToString();
+                            }
+                            @Html.Label("tb" + i, temp, new { @class = "form-control" });
+                            //@Model.LstGeneracion[i][j][a];
+                        }
+
+
+
+
+                    }
+
+
+                }
+
+
+            </td>
+
+
+        </tr>
+
+
+        }
+    </table>
+</form>
+
+
+
+
+
+
